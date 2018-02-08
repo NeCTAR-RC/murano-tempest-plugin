@@ -78,7 +78,13 @@ ApplicationCatalogGroup = [
                      "are expected to run"),
     cfg.BoolOpt("deployment_tests",
                 default=False,
-                help="Whether or not deployment tests are expected to run")
+                help="Whether or not deployment tests are expected to run"),
+    cfg.StrOpt("availability_zone",
+               default="nova",
+               help="Choose availability zone to deploy the environment"),
+    cfg.BoolOpt("use_floating_ip",
+                default=False,
+                help="Whether to use floatingip for instances")
 ]
 
 ServiceBrokerGroup = [
