@@ -65,6 +65,8 @@ class BaseApplicationCatalogScenarioTest(test.BaseTestCase):
         super(BaseApplicationCatalogScenarioTest, cls).resource_setup()
         cls.linux_image = CONF.application_catalog.linux_image
         cls.cirros_image = cls.get_required_image_name()
+        cls.availability_zone = CONF.application_catalog.availability_zone
+        cls.use_floating_ip = CONF.application_catalog.use_floating_ip
 
     @classmethod
     def get_client_with_isolated_creds(cls, type_of_creds="admin"):
@@ -149,8 +151,8 @@ class BaseApplicationCatalogScenarioTest(test.BaseTestCase):
             "instance": {
                 "flavor": flavor,
                 "image": self.linux_image,
-                "assignFloatingIp": True,
-                "availabilityZone": "nova",
+                "assignFloatingIp": self.use_floating_ip,
+                "availabilityZone": self.availability_zone,
                 "volumes": attributes,
                 "?": {
                     "type": "io.murano.resources.LinuxMuranoInstance",
@@ -287,7 +289,10 @@ class BaseApplicationCatalogScenarioTest(test.BaseTestCase):
         for service in self.application_catalog_client.\
                 get_services_list(environment_id):
             if inst_name in service['instance']['name']:
-                return service['instance']['floatingIpAddress']
+                if service['instance']['assignFloatingIp']:
+                    return service['instance']['floatingIpAddress']
+                else:
+                    return service['instance']['ipAddresses'][0]
 
     def check_port_access(self, ip, port):
         result = 1
