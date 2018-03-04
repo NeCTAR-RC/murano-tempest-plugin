@@ -67,6 +67,7 @@ class BaseApplicationCatalogScenarioTest(test.BaseTestCase):
         cls.cirros_image = cls.get_required_image_name()
         cls.availability_zone = CONF.application_catalog.availability_zone
         cls.use_floating_ip = CONF.application_catalog.use_floating_ip
+        cls.flavor = CONF.compute.flavor_ref
 
     @classmethod
     def get_client_with_isolated_creds(cls, type_of_creds="admin"):
@@ -146,10 +147,10 @@ class BaseApplicationCatalogScenarioTest(test.BaseTestCase):
                 return instance['id']
 
     def apache(
-            self, attributes=None, userName=None, flavor='m1.tiny'):
+            self, attributes=None, userName=None):
         post_body = {
             "instance": {
-                "flavor": flavor,
+                "flavor": self.flavor,
                 "image": self.linux_image,
                 "assignFloatingIp": self.use_floating_ip,
                 "availabilityZone": self.availability_zone,
