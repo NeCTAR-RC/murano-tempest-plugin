@@ -50,6 +50,22 @@ class TestMuranoDeployment(base.BaseApplicationCatalogScenarioTest):
         else:
             cls.client = cls.application_catalog_client
 
+        # remove existing test packages
+        existing_packages = cls.client.get_list_packages()
+        dup_packages = []
+        for package in existing_packages:
+            if package["fully_qualified_name"] == \
+                    'io.murano.test.apache.ApacheHttpServerCustom' or \
+                    package["fully_qualified_name"] == \
+                    'io.murano.apps.test.Lighttpd' or \
+                    package["fully_qualified_name"] == \
+                    'io.murano.apps.test.UpdateExecutor':
+                dup_packages.append(package["id"])
+
+        if dup_packages:
+            for package in dup_packages:
+                cls.client.delete_package(package)
+
         cls.packages[0] = cls.client.upload_package(
             application_name, archive_name, dir_with_archive,
             {"categories": ["Web"], "tags": ["test"]})
