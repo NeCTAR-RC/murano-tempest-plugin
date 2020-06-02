@@ -84,7 +84,8 @@ class BaseApplicationCatalogScenarioTest(test.BaseTestCase):
         cls.cirros_image = cls.get_required_image_name()
         cls.availability_zone = CONF.application_catalog.availability_zone
         cls.use_floating_ip = CONF.application_catalog.use_floating_ip
-        cls.flavor = CONF.compute.flavor_ref
+        cls.flavor = (CONF.application_catalog.flavor_ref or
+                      CONF.compute.flavor_ref)
 
     @classmethod
     def get_client_with_isolated_creds(cls, type_of_creds="admin"):
