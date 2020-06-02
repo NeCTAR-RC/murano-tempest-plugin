@@ -87,7 +87,11 @@ ApplicationCatalogGroup = [
                help="Choose availability zone to deploy the environment"),
     cfg.BoolOpt("use_floating_ip",
                 default=False,
-                help="Whether to use floatingip for instances")
+                help="Whether to use floatingip for instances"),
+    cfg.StrOpt("flavor_ref",
+               default=None,
+               help="The flavor to use for application. If none, "
+                    "the value of compute.flavor_ref is used instead")
 ]
 
 ServiceBrokerGroup = [
