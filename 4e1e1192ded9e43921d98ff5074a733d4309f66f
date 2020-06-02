@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47c28ec8_8afe8e82",
+        "filename": "murano_tempest_tests/config.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-06-02T23:14:43Z",
+      "side": 1,
+      "message": "this should probably be the default from the compute flavor_ref. This can go upstream and it won\u0027t be accepted with this default",
+      "range": {
+        "startLine": 92,
+        "startChar": 24,
+        "endLine": 92,
+        "endChar": 32
+      },
+      "revId": "4e1e1192ded9e43921d98ff5074a733d4309f66f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
