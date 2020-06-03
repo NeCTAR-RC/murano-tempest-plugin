@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4a2ff44_40a5dd96",
+        "filename": "murano_tempest_tests/tests/scenario/application_catalog/base.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-06-03T00:21:37Z",
+      "side": 1,
+      "message": "could just do \n\ncls.flavor \u003d CONF.application_catalog.flavor_ref or CONF.compute.flavor_ref",
+      "revId": "2a8b0feee57000ae5801f335937c7f5fba25224f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
