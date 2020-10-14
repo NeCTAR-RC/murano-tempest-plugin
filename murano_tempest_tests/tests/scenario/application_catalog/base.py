@@ -17,6 +17,8 @@ import requests
 import socket
 import time
 
+from testtools import content
+
 from tempest.clients import Manager as services_manager
 from tempest.common import credentials_factory as common_creds
 from tempest.common import waiters
@@ -264,6 +266,17 @@ class BaseApplicationCatalogScenarioTest(test.BaseTestCase):
         }
         return post_body
 
+    def add_status_detail(self, environment):
+        deployment = self.application_catalog_client.list_deployments(
+            environment['id'])[0]
+
+        statuses = self.application_catalog_client.list_deployment_statuses(
+            environment['id'], deployment['id'])
+
+        status = '\n'.join([s['text'] for s in statuses])
+        self.addDetail('status', content.text_content(status))
+
+
     def deploy_environment(self, environment, session):
         self.application_catalog_client.deploy_session(environment['id'],
                                                        session['id'])
@@ -277,6 +290,7 @@ class BaseApplicationCatalogScenarioTest(test.BaseTestCase):
             self.fail('Environment deployment is not finished in {} seconds'.
                       format(timeout))
         else:
+            self.add_status_detail(environment)
             self.fail('Environment has status {}'.format(
                 deployed_env['status']))
 
