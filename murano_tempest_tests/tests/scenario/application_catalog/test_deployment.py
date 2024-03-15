@@ -52,7 +52,7 @@ class TestMuranoDeployment(base.BaseApplicationCatalogScenarioTest):
 
         # remove existing test packages
         existing_packages = cls.client.get_list_packages()
-        for package in existing_packages:
+        for package in existing_packages["packages"]:
             if package["fully_qualified_name"] in \
                     ['io.murano.test.apache.ApacheHttpServerCustom',
                      'io.murano.apps.test.Lighttpd',
