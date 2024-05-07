@@ -37,7 +37,7 @@ class TestRepositorySanity(base.BaseArtifactsTest):
     @decorators.idempotent_id('2818aaa0-6613-4bd9-8abe-02713121357a')
     def test_get_list_packages(self):
         package_list = self.artifacts_client.get_list_packages()
-        self.assertIsInstance(package_list["packages"], list)
+        self.assertIsInstance(package_list, list)
 
     @decorators.attr(type='smoke')
     @decorators.idempotent_id('bc717c98-5f6b-42a6-9131-43a711cfe848')
@@ -50,9 +50,7 @@ class TestRepositorySanity(base.BaseArtifactsTest):
             application_name, archive_name, dir_with_archive,
             {"categories": [], "tags": [], 'is_public': False})
         package_list = self.artifacts_client.get_list_packages()
-        self.assertIn(
-            package['id'], {pkg['id'] for pkg in package_list["packages"]})
+        self.assertIn(package['id'], {pkg['id'] for pkg in package_list})
         self.artifacts_client.delete_package(package['id'])
         package_list = self.artifacts_client.get_list_packages()
-        self.assertNotIn(
-            package['id'], {pkg['id'] for pkg in package_list["packages"]})
+        self.assertNotIn(package['id'], {pkg['id'] for pkg in package_list})

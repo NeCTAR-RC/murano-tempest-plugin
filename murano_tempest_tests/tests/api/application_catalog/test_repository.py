@@ -37,7 +37,7 @@ class TestRepositorySanity(base.BaseApplicationCatalogTest):
     @decorators.idempotent_id('d0f3ad6c-70b4-4ce0-90c5-e7afb20ace80')
     def test_get_list_packages(self):
         package_list = self.application_catalog_client.get_list_packages()
-        self.assertIsInstance(package_list["packages"], list)
+        self.assertIsInstance(package_list, list)
 
     @decorators.attr(type='smoke')
     @decorators.idempotent_id('53f679d9-955f-4dc1-8cdc-1fcdcfbb07a5')
@@ -50,12 +50,10 @@ class TestRepositorySanity(base.BaseApplicationCatalogTest):
             application_name, archive_name, dir_with_archive,
             {"categories": [], "tags": [], 'is_public': False})
         package_list = self.application_catalog_client.get_list_packages()
-        self.assertIn(
-            package['id'], {pkg['id'] for pkg in package_list["packages"]})
+        self.assertIn(package['id'], {pkg['id'] for pkg in package_list})
         self.application_catalog_client.delete_package(package['id'])
         package_list = self.application_catalog_client.get_list_packages()
-        self.assertNotIn(
-            package['id'], {pkg['id'] for pkg in package_list["packages"]})
+        self.assertNotIn(package['id'], {pkg['id'] for pkg in package_list})
 
 
 class TestRepository(base.BaseApplicationCatalogIsolatedAdminTest):
