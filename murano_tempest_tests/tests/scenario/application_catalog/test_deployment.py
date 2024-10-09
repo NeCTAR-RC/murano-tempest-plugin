@@ -54,7 +54,7 @@ class TestMuranoDeployment(base.BaseApplicationCatalogScenarioTest):
         existing_packages = cls.client.get_list_packages()
         for package in existing_packages:
             if package["fully_qualified_name"] in \
-                    ['io.murano.test.apache.ApacheHttpServerCustom',
+                    ['io.murano.apps.test.ApacheHttpServerCustom',
                      'io.murano.apps.test.Lighttpd',
                      'io.murano.apps.test.UpdateExecutor']:
                 cls.client.delete_package(package["id"])

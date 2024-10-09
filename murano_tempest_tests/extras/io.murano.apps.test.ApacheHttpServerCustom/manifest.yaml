@@ -12,7 +12,7 @@
 
 Format: 1.0
 Type: Application
-FullName: io.murano.test.apache.ApacheHttpServerCustom
+FullName: io.murano.apps.test.ApacheHttpServerCustom
 Name: Apache HTTP Server Custom
 Description: |
  The Apache HTTP Server Project is an effort to develop and maintain an
